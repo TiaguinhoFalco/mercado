@@ -5,11 +5,33 @@
  */
 package tela.manutencao;
 
+import tela.listagem.ListagemMercado;
 /**
  *
  * @author Administrador
  */
 public class ManutencaoMercado extends javax.swing.JDialog {
+        public ListagemMercado listagem;
+    
+        public ManutencaoMercado(java.awt.Frame parent, boolean modal, ListagemMercado listagem) {
+        super(parent, modal);
+        initComponents();
+        this.listagem = listagem;
+        
+        jtfCodigo.setEnabled(false);  //desabilitando a edição do campo código
+        btnAlterar.setEnabled(false); //desabilitando o botão alterar
+        btnExcluir.setEnabled(false); //desabilitando o botão excluir
+        
+        
+  }
+         public ManutencaoMercado(java.awt.Frame parent, boolean modal, ListagemMercado listagem, int pk) {
+        super(parent, modal);
+        initComponents();
+        
+        jtfCodigo.setEnabled(false);  //desabilitando a edição do campo código
+        this.listagem = listagem;
+        controlador.ControladorMercado.atualizaCampos(this, pk);//pegando os valores do BD e colocando na tela
+    }
 
     /**
      * Creates new form ManutencaoMercado

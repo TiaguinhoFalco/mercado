@@ -75,7 +75,7 @@ public class DaoMercado {
     }
     
        public static boolean excluir(Mercado objeto) {
-        String sql = "DELETE FROM produto WHERE codigo=?";
+        String sql = "DELETE FROM mercado WHERE codigo=?";
         try {
             PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
             ps.setInt(1, objeto.getCodigo());
@@ -129,6 +129,9 @@ public class DaoMercado {
                 objeto.setCodigo(rs.getInt("codigo"));
                 objeto.setNome_fantasia(rs.getString("nome_fantasia"));
                 objeto.setRazao_social(rs.getString("razao_social"));
+                objeto.setFundacao(rs.getDate("fundacao").toLocalDate());
+                objeto.setNr_funcionarios(rs.getInt("nr_funcionarios"));
+                objeto.setValor_bolsa(rs.getDouble("valor_bolsa"));
                 return objeto;//não mexa nesse, ele adiciona o objeto na lista
             }
         } catch (SQLException | ClassNotFoundException ex) {

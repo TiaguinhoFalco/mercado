@@ -5,6 +5,7 @@
  */
 package tela.listagem;
 import controlador.ControladorMercado;
+import tela.manutencao.ManutencaoMercado;
 
 /**
  *
@@ -51,9 +52,19 @@ public class ListagemMercado extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tabelaMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabela);
 
         btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,6 +98,23 @@ public class ListagemMercado extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+ManutencaoMercado manutencao = new ManutencaoMercado(null, true, this);
+manutencao.setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void tabelaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMousePressed
+if (evt.getClickCount() == 2) {
+            //obtem a linha selecionada
+            int linhaSelecionada = tabela.getSelectedRow();
+            //obtém a chave primária
+            int pk = Integer.parseInt(tabela.getValueAt(linhaSelecionada, 0).toString()); //pk está na coluna 0
+            //abre a manutenção
+            ManutencaoMercado manutencao = new ManutencaoMercado(null, true, this, pk);
+            manutencao.setVisible(true);
+}        // TODO add your handling code here:
+    }//GEN-LAST:event_tabelaMousePressed
 
     /**
      * @param args the command line arguments
